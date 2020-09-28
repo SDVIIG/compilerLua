@@ -1,5 +1,4 @@
 import buffer.Buffer;
-import codeGen.CodeGen;
 import idTable.IdTable;
 import lexer.Lexer;
 import org.junit.Assert;

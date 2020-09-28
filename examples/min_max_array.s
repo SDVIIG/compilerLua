@@ -10,7 +10,7 @@ main:
 	movq	%rsp, %rbp
 	subq	$2048, %rsp
 	movl	$0,	-4(%rbp)
-	movl    $53 , -8(%rbp)
+	movl    $77 , -8(%rbp)
 	movl    $12 , -12(%rbp)
 	movl    $33 , -16(%rbp)
 	movl    $17 , -20(%rbp)

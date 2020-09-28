@@ -80,8 +80,8 @@ public class CodeGen {
 
     public void start(Node tree) {
         assemblerStart();
-        List<String> asm = new ArrayList<>();
         assembler.addAll(generator(tree));
+        assembler.add(6, "\tsubq\t$" + stackBytes(varBytes) + ", %rsp");
         assembler.addAll(0, literal);
         assembler.add("\tleave");
         assembler.add("\tret");
@@ -129,7 +129,7 @@ public class CodeGen {
         assembler.add("main:");
         assembler.add("\tpushq\t%rbp");
         assembler.add("\tmovq\t%rsp, %rbp");
-        assembler.add("\tsubq\t$2048, %rsp");
+       // assembler.add("\tsubq\t$2048, %rsp");
     }
 
     public List<String> codegenIf(Node ifNode, int randForCommand) {
@@ -512,7 +512,7 @@ public class CodeGen {
                 break;
             case 1:
                 Variable var = idTable.get(names.get(0));
-                if (var.getTokenType().equals(TokenType.STRING)){
+                if (var.getTokenType().equals(TokenType.STRING)) {
                     assemblerPrint.add(0, "\tleaq\t-" + addressVar.get(names.get(0)) + "(%rbp),\t%rax");
                     assemblerPrint.add(1, "\tmovq\t%rax,\t%rsi");
                     assemblerPrint.add(2, "\tmovl\t$." + getNameLC() + ",\t%edi");
@@ -661,4 +661,15 @@ public class CodeGen {
             node++;
         }
     }
+
+    private Integer stackBytes(Integer varBytes) {
+        if (varBytes % 16 == 0) {
+            return varBytes;
+        } else {
+            Integer tmp = varBytes / 16;
+            tmp++;
+            return tmp * 16;
+        }
+    }
+
 }

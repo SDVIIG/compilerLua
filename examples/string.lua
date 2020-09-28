@@ -1,5 +1,5 @@
 a = "acaa"
-b = "bcaa"
+b = "caa"
 
 print("Строка  '%s'", a)
 print(" содержит строку '%s'?\n", b)
